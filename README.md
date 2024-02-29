@@ -73,7 +73,6 @@
         AUTH_PROVIDER_X509_CERT_URL=<<auth_provider_x509_cert_url>>
         CLIENT_X509_CERT_URL=<<client_x509_cert_url>>
         UNIVERSE_DOMAIN=googleapis.com
-        SCOPES=https://www.googleapis.com/auth/spreadsheets,https://www.googleapis.com/auth/drive
         ```
     Создать базу командой: 
         ```
