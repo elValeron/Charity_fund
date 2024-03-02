@@ -57,7 +57,6 @@ async def spreadsheets_create(
             json=spreadsheet_body
         )
     )
-    print(response)
     return response['spreadsheetId'], response['spreadsheetUrl']
 
 
@@ -109,10 +108,7 @@ async def spreadsheets_update_value(
     await wrapper_services.as_service_account(
         service.spreadsheets.values.update(
             spreadsheetId=spreadsheetid,
-            range='R1C1:R{row_count}C{column_count}'.format(
-                row_count=ROW_COUNT,
-                column_count=COLUMN_COUNT
-            ),
+            range=f'R1C1:R{ROW_COUNT}C{COLUMN_COUNT}',
             valueInputOption='USER_ENTERED',
             json=update_body
         )

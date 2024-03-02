@@ -1,5 +1,4 @@
 from aiogoogle import Aiogoogle
-from aiogoogle.excs import ValidationError
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -38,5 +37,5 @@ async def get_report(
                                         projects,
                                         wrapper_services)
     except ValueError as error:
-        raise ValidationError(error)
+        raise ValueError(error)
     return spreadsheet_url
