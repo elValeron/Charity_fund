@@ -1,5 +1,7 @@
+from http import HTTPStatus
+
 from aiogoogle import Aiogoogle
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.db import get_async_session
@@ -37,5 +39,5 @@ async def get_report(
                                         projects,
                                         wrapper_services)
     except ValueError as error:
-        raise ValueError(error)
+        raise HTTPException(status_code=HTTPStatus.BAD_REQUEST, detail=error)
     return spreadsheet_url
