@@ -37,9 +37,10 @@ SPREADSHEET_BODY = {
 def data_size_validator(row_count, column_count, table_values):
     if len(table_values) > row_count:
         raise ValueError(ERROR_MAX_ROW_COUNT)
-    for column in table_values:
-        if len(column) > column_count:
-            raise ValueError(ERROR_MAX_COLUMN_COUNT)
+    maximal_column_count = max(len(column) for column in table_values)
+    if maximal_column_count > column_count:
+        raise ValueError(ERROR_MAX_COLUMN_COUNT)
+    return maximal_column_count
 
 
 async def spreadsheets_create(
@@ -105,11 +106,11 @@ async def spreadsheets_update_value(
         'majorDimension': 'ROWS',
         'values': table_values
     }
-    data_size_validator(ROW_COUNT, COLUMN_COUNT, table_values)
+    column = data_size_validator(ROW_COUNT, COLUMN_COUNT, table_values)
     await wrapper_services.as_service_account(
         service.spreadsheets.values.update(
             spreadsheetId=spreadsheetid,
-            range=f'R1C1:R{len(table_values)}C{COLUMN_COUNT}',
+            range=f'R1C1:R{len(table_values)}C{column}',
             valueInputOption='USER_ENTERED',
             json=update_body
         )
