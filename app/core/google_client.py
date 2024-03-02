@@ -3,6 +3,10 @@ from aiogoogle.auth.creds import ServiceAccountCreds
 
 from app.core.config import settings
 
+COLUMN_COUNT = 3
+FORMAT = "%Y/%m/%d %H:%M:%S"
+ROW_COUNT = 100
+
 
 SCOPES = [
     'https://www.googleapis.com/auth/spreadsheets',
@@ -14,7 +18,7 @@ INFO = {
     'type': settings.type,
     'project_id': settings.project_id,
     'private_key_id': settings.private_key_id,
-    'private_key': settings.private_key,
+    'private_key': settings.private_key.replace('\\n', '\n'),
     'client_email': settings.client_email,
     'client_id': settings.client_id,
     'auth_uri': settings.auth_uri,
