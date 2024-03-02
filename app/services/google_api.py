@@ -39,7 +39,8 @@ def data_size_validator(row_count, column_count, table_values):
         raise ValueError(ERROR_MAX_ROW_COUNT)
     for column in table_values:
         if len(column) > column_count:
-            raise ValueError(ERROR_MAX_COLUMN_COUNT)        
+            raise ValueError(ERROR_MAX_COLUMN_COUNT)
+
 
 async def spreadsheets_create(
         wrapper_service: Aiogoogle,
