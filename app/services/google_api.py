@@ -6,8 +6,12 @@ from aiogoogle import Aiogoogle
 from app.core.config import settings
 from app.core.google_client import COLUMN_COUNT, FORMAT, ROW_COUNT
 
-ERROR_MAX_ROW_COUNT = 'Количество строк больше максимального значения'
-ERROR_MAX_COLUMN_COUNT = 'Количество колонок больше максимального значения'
+ERROR_MAX_ROW_COUNT = (
+    'Количество строк {rows} больше максимального значения {max_rows}'
+)
+ERROR_MAX_COLUMN_COUNT = (
+    'Количество колонок {columns} больше максимального значения {max_columns}'
+)
 
 HEADER = [
     ['Отчёт от'],
@@ -32,15 +36,6 @@ SPREADSHEET_BODY = {
         }
     }]
 }
-
-
-def data_size_validator(row_count, column_count, table_values):
-    if len(table_values) > row_count:
-        raise ValueError(ERROR_MAX_ROW_COUNT)
-    maximal_column_count = max(len(column) for column in table_values)
-    if maximal_column_count > column_count:
-        raise ValueError(ERROR_MAX_COLUMN_COUNT)
-    return maximal_column_count
 
 
 async def spreadsheets_create(
@@ -106,11 +101,25 @@ async def spreadsheets_update_value(
         'majorDimension': 'ROWS',
         'values': table_values
     }
-    column = data_size_validator(ROW_COUNT, COLUMN_COUNT, table_values)
+    column_count = max(len(column) for column in table_values)
+    if len(table_values) > ROW_COUNT:
+        raise ValueError(
+            ERROR_MAX_ROW_COUNT.format(
+                rows=len(table_values),
+                max_rows=ROW_COUNT
+            )
+        )
+    if column_count > COLUMN_COUNT:
+        raise ValueError(
+            ERROR_MAX_COLUMN_COUNT.format(
+                columns=column_count,
+                max_columns=COLUMN_COUNT
+            )
+        )
     await wrapper_services.as_service_account(
         service.spreadsheets.values.update(
             spreadsheetId=spreadsheetid,
-            range=f'R1C1:R{len(table_values)}C{column}',
+            range=f'R1C1:R{len(table_values)}C{column_count}',
             valueInputOption='USER_ENTERED',
             json=update_body
         )
