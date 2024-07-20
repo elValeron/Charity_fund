@@ -1,7 +1,7 @@
-# [QRKot - Благотворительный фонд помощи котикам!=^.^=](https://github.com/elValeron/QRkot_spreadsheets.git)
+# [Charity_Fund - Благотворительный фонд для сбора пожертвований приютам(https://github.com/elValeron/QRkot_spreadsheets.git)
 
 ## Описание: 
-    - Благотворительный фонд QRKot создан для помощи котикам в столь непростое время!
+    - Сервис Charity_fund создан для помощи в сборе средст приютам для животных. Распределение средств организовано по принципу FIFO(first in first out)
 
 
 ## Стэк:
