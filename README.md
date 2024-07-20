@@ -1,4 +1,4 @@
-# [Charity_Fund - Благотворительный фонд для сбора пожертвований приютам(https://github.com/elValeron/QRkot_spreadsheets.git)
+# [Charity_Fund - Благотворительный фонд для сбора пожертвований приютам(https://github.com/elValeron/Charity_fund.git)
 
 ## Описание: 
     - Сервис Charity_fund создан для помощи в сборе средст приютам для животных. Распределение средств организовано по принципу FIFO(first in first out)
