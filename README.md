@@ -16,11 +16,11 @@
     - Клонировать репозиторий и перейти в него в терминале:
 
         ```
-        - git clone https://github.com/elValeron/QRkot_spreadsheets.git
+        - git clone https://github.com/elValeron/Charity_fund.git
         ```
 
         ```
-        - cd QRkot_spreadsheets
+        - cd Charity_fund
         ```
 
     - Cоздать и активировать виртуальное окружение:
